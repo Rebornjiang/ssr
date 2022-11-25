@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    hello reborn
+    <h1>content ==> {{ msg }}</h1>
+    <input type="text" v-model="msg" />
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
+  data() {
+    return {
+      msg: "sdf",
+    };
+  },
 };
 </script>
 <style></style>
