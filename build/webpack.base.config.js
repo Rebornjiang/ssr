@@ -1,4 +1,6 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+
 const resolvePath = require('./utils/path')
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -17,7 +19,7 @@ module.exports = {
     },
     extensions: ['.js', '.vue', '.json']
   },
-  devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: isProd ? 'source-map' : 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
@@ -46,5 +48,8 @@ module.exports = {
       extractComments: false
     })],
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+    new FriendlyErrorsWebpackPlugin()
+  ],
 }
