@@ -7,7 +7,7 @@ const createDevRenderer = require('./dev/createDevRenderer')
 
 let renderer = null
 const isProd = process.env.NODE_ENV === 'production' ? true : false
-let loadingRenderer = null
+let onReady = null
 
 const server = express()
 
@@ -21,7 +21,8 @@ if (isProd) {
     clientManifest
   })
 } else {
-  loadingRenderer = createDevRenderer(server, (serverBundle, template, clientManifest) => {
+  onReady = createDevRenderer(server, ({ template, serverBundle, clientManifest }) => {
+    console.log('reset renderer')
     renderer = createBundleRenderer(serverBundle, {
       // ……renderer 的其他选项
       template,
@@ -31,13 +32,9 @@ if (isProd) {
 }
 
 
-
-
-
 // 负责渲染的 render 函数
 const render = (req, res) => {
   renderer.renderToString({ title: 'hello SSR' }, (err, html) => {
-    console.log(html)
     if (err) return res.status(500).end('渲染失败')
     res.end(html)
   })
@@ -46,7 +43,7 @@ const render = (req, res) => {
 server.use('/dist', express.static('./dist'))
 
 server.get('*', isProd ? render : async (req, res) => {
-  await loadingRenderer
+  await onReady
   render(req, res)
 })
 

@@ -7,7 +7,6 @@ import App from './App.vue'
 // 应用程序、router 和 store 实例
 
 export function createApp() {
-  console.log('client diaoyong')
   const app = new Vue({
     // 根实例简单的渲染应用程序组件。
 
