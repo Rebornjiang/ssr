@@ -17,7 +17,7 @@ module.exports = (server, createRenderer) => {
     }
   }
 
-  // 监听 bundle
+  // 监听 template
   function watchTemplate() {
     // if (!template) {
 
@@ -50,7 +50,7 @@ module.exports = (server, createRenderer) => {
     })
   }
 
-  // 监听客户端
+  // 监听客户端 
   function watchClientBundle() {
     const config = require(resolvePath('build/webpack.client.config.js'))
     // 1. 使用 webpack hot module 作为 webpack 插件来监听编译器的变化

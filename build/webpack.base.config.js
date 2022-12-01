@@ -5,7 +5,6 @@ const resolvePath = require('./utils/path')
 const TerserPlugin = require("terser-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === 'production'
-
 module.exports = {
   mode: isProd ? 'production' : 'development',
   output: {
@@ -15,7 +14,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': resolvePath('../src/')
+      '@': resolvePath('src/')
     },
     extensions: ['.js', '.vue', '.json']
   },

@@ -34,7 +34,10 @@ if (isProd) {
 
 // 负责渲染的 render 函数
 const render = (req, res) => {
-  renderer.renderToString({ title: 'hello SSR' }, (err, html) => {
+  const context = { title: 'hello SSR', url: req.url }
+  console.log('aaaaaaaaaa，没有输出？')
+  renderer.renderToString(context, (err, html) => {
+    console.log(err)
     if (err) return res.status(500).end('渲染失败')
     res.end(html)
   })
